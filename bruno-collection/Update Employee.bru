@@ -1,0 +1,21 @@
+meta {
+  name: Update Employee
+  type: http
+  seq: 6
+}
+
+put {
+  url: http://localhost:8080/employees/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "name": "John Doe Updated",
+      "email": "john.updated@example.com",
+      "department": "Finance",
+      "salary": 65000
+  }
+  
+}

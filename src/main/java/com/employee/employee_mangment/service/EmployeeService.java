@@ -1,9 +1,12 @@
 package com.employee.employee_mangment.service;
 
+import com.employee.employee_mangment.dto.EmployeeDTO;
 import com.employee.employee_mangment.entity.Employee;
 import com.employee.employee_mangment.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -14,11 +17,15 @@ public class EmployeeService {
         this.repository = repository;
     }
 
-    public void save(Employee employee) {
-        repository.save(employee);
+    public Employee save(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setName(employeeDTO.getName());
+        employee.setDepartment(employeeDTO.getDepartment());
+        employee.setSalary(employeeDTO.getSalary());
+        return repository.save(employee);
     }
 
-    public Employee findById(int id) {
+    public Optional<Employee> findById(int id) {
         return repository.findById(id);
     }
 
@@ -26,11 +33,19 @@ public class EmployeeService {
         return repository.findAll();
     }
 
-    public void update(Employee employee) {
-        repository.update(employee);
+    public Employee update(int id, EmployeeDTO employeeDTO) {
+        Optional<Employee> existingEmployee = repository.findById(id);
+        if (existingEmployee.isEmpty()) {
+            throw new IllegalArgumentException("Employee with id " + id + " not found");
+        }
+        Employee employee = existingEmployee.get();
+        employee.setName(employeeDTO.getName());
+        employee.setDepartment(employeeDTO.getDepartment());
+        employee.setSalary(employeeDTO.getSalary());
+        return repository.update(employee);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 }

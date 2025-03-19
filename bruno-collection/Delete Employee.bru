@@ -1,0 +1,21 @@
+meta {
+  name: Delete Employee
+  type: http
+  seq: 7
+}
+
+delete {
+  url: http://localhost:8080/employees/1
+  body: none
+  auth: none
+}
+
+body:json {
+  {
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "department": "HR",
+      "salary": 75000
+  }
+  
+}

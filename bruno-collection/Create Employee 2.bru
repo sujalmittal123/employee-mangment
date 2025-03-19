@@ -1,0 +1,21 @@
+meta {
+  name: Create Employee 2
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/employees
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "department": "HR",
+      "salary": 75000
+  }
+  
+}
